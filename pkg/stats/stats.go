@@ -4,11 +4,12 @@ import (
 	"github.com/Umar2505/11.C.1/v2/pkg/bank/types"
 )
 
-func CategoriesAvg(payments []types.Payment) map[types.Category]types.Money {
-	result := map[types.Category]types.Money{}
+func PeriodsDynamic(
+	first map[types.Category]types.Money, second map[types.Category]types.Money,) map[types.Category]types.Money {
+		result := map[types.Category]types.Money{}
 
-	for _, v := range payments {
-		result[v.Category]+=v.Amount
-	}
-	return result
+		for v1, v2 := range first {
+			result[v1]=second[v1]-v2
+		}
+		return result
 }

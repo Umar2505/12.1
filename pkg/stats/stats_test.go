@@ -7,35 +7,22 @@ import (
 	"github.com/Umar2505/11.C.1/v2/pkg/bank/types"
 )
 
-func TestCategoriesAvg_positive(t *testing.T) {
-	payments:= []types.Payment{
-		{
-			Amount: 10_000,
-			Category: "auto",
-		},
-		{
-			Amount: 20_000,
-			Category: "food",
-		},
-		{
-			Amount: 50_000,
-			Category: "cloth",
-		},
-		{
-			Amount: 15_000,
-			Category: "food",
-		},
-		{
-			Amount: 200_000,
-			Category: "cloth",
-		},
+func TestPeriodsDynamic_positive(t *testing.T) {
+	first:= map[types.Category]types.Money{
+		"auto":10,
+		"food":20,
+		"clothes":10,
 	}
-	result:= CategoriesAvg(payments)
+	second:= map[types.Category]types.Money{
+		"food":20,
+		"auto":50,
+	}
+	result:= PeriodsDynamic(first,second)
 
 	expected := map[types.Category]types.Money{
-		"auto"	:	10_000,
-		"cloth"	:	250_000,
-		"food"	:	35_000,
+		"auto"		: 40,
+		"clothes"	: -10,
+		"food"		: 0,
 	}
 
 	if !reflect.DeepEqual(result,expected) {
